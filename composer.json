@@ -7,5 +7,6 @@
             "email": "buehner@me.com"
         }
     ],
+    "license": "MIT",
     "require": {}
 }
