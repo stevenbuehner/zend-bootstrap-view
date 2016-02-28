@@ -1,0 +1,29 @@
+<?php
+if (isset ( $message )) {
+	$level = isset ( $level ) ? $level : 'warning';
+	$title = isset ( $title ) ? $title : '';
+	
+	switch ($level) {
+		case 'emergency' :
+		case 'critical' :
+		case 'error' :
+		case 'danger' :
+			$level = 'danger';
+			break;
+		case 'alert' :
+		case 'warning' :
+			$level = 'warning';
+			break;
+		case 'info' :
+		case 'debug' :
+			$level = 'info';
+		case 'success' :
+			break;
+		default :
+			$level = 'warning';
+	}
+	
+	echo "<div class='alert alert-{$level}' role='alert'>
+	<strong>{$title}</strong> {$message}</div>";
+}
+?>

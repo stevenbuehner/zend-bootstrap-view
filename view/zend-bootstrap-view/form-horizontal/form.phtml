@@ -1,0 +1,15 @@
+<?php
+$form = $this->form;
+$form->setAttribute ( 'method', 'post' );
+$form->setAttribute ( 'role', 'form' );
+$form->setAttribute ( 'class', 'form-horizontal' );
+
+$form->prepare ();
+echo $this->form ()->openTag ( $form );
+
+foreach ( $form->getElements () as $element ) {
+	echo $this->formrow ( $element, null, null, 'zend-bootstrap-view/form-horizontal/form-elements.phtml' );
+}
+
+echo $this->form ()->closeTag ();
+?>

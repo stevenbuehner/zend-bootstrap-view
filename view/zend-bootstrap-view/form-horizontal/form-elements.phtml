@@ -1,0 +1,80 @@
+<div class="form-group">
+<?php
+$name = $this->element->getName ();
+$label = $this->element->getLabel ();
+$value = $this->element->getValue ();
+
+if (empty ( $this->element->getAttribute ( 'placeholder' ) ))
+	$this->element->setAttribute ( 'placeholder', $label );
+
+if ($this->element instanceof \Zend\Form\Element\Button || $this->element instanceof \Zend\Form\Element\Submit) :
+	$class = $this->element->getAttribute ( 'class' );
+	if (empty ( $class ))
+		$class = "btn btn-default";
+	else {
+		$class = preg_replace ( "~(^| *)(btn|btn-default)($| *)~i", "", $class );
+		$class = trim ( $class . " btn btn-default" );
+	}
+	$this->element->setAttribute ( 'class', "{$class}" );
+	
+	?>
+	<div class="col-sm-10 col-sm-offset-2">
+		<?php echo $this->formelement($this->element); ?>
+	</div>
+
+ 
+ <?php elseif ($this->element instanceof \Zend\Form\Element\Checkbox): ?>
+	<div class="col-sm-offset-2 col-sm-10">
+		<div class="checkbox">
+			<label>
+	          <?php
+	
+	echo $this->formelement ( $this->element );
+	echo $label;
+	?>
+	        </label>
+		</div>
+	</div>
+	
+	
+ <?php elseif ($this->element instanceof \Zend\Form\Element\File): ?>
+ 	<label for="<?php echo $name; ?>" class="col-sm-2 control-label"><?php echo $label; ?></label>
+	<div class="col-sm-7">
+	
+	<?php
+	$extraData = "";
+	$fileNameValue = is_array ( $value ) ? $this->escapehtml ( $value ["name"] ) : $this->escapehtml ( $value );
+	$extraData = "data-filename='{$fileNameValue}'"?>
+		
+		<input id="<?php echo $name; ?>" class="form-control" type="file"
+			<?php echo $extraData; ?> name="<?php echo $name; ?>">
+	</div>
+	<div class="col-sm-3">
+	<?php
+	if (! empty ( $fileNameValue ))
+		echo $this->escapehtml ( 'Datei: ' . $fileNameValue );
+	?>
+	</div>
+	
+ <?php else : ?>
+	<?php
+	if (empty ( $this->element->getAttribute ( 'class' ) ))
+		$this->element->setAttribute ( 'class', 'form-control' );
+	?>
+	
+	<label for="<?php echo $name; ?>" class="col-sm-2 control-label"><?php echo $label; ?></label>
+	<div class="col-sm-10">
+		<?php echo $this->formelement($this->element); ?>
+		
+	</div>
+ <?php endif; ?>
+ 
+ <?php
+	$msg = $this->element->getMessages ();
+	if (! empty ( $msg )) {
+		echo $this->partial ( 'zend-bootstrap-view/universal/element-errors.phtml', array( 
+				'messages' => $msg 
+		) );
+	}
+	?>
+</div>

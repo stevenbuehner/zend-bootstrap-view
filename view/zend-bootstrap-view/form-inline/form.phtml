@@ -1,0 +1,30 @@
+<?php
+use Zend\Form\Form;
+/* @var $form Form */
+
+$form = $this->form;
+
+if (null === $form->getAttribute ( 'method' ))
+	$form->setAttribute ( 'method', 'post' );
+
+if (null === $form->getAttribute ( 'role' ))
+	$form->setAttribute ( 'role', 'form' );
+
+if (null === $form->getAttribute ( 'class' ))
+	$form->setAttribute ( 'class', 'form-inline' );
+
+$form->prepare ();
+echo $this->form ()->openTag ( $form );
+?>
+
+<div class="form-group">
+<?php
+foreach ( $form->getElements () as $element ) {
+	echo $this->formrow ( $element, null, null, 'zend-bootstrap-view/form-inline/form-elements.phtml' );
+}
+?>
+</div>
+
+<?php
+echo $this->form ()->closeTag ();
+?>

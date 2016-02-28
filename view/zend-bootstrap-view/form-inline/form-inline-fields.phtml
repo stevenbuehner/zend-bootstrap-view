@@ -1,0 +1,47 @@
+<div class="form-group">
+<?php
+$name = $this->element->getName ();
+$label = $this->element->getLabel ();
+
+if (empty ( $this->element->getAttribute ( 'placeholder' ) ))
+	$this->element->setAttribute ( 'placeholder', $label );
+
+if ($this->element instanceof \Zend\Form\Element\Button || $this->element instanceof \Zend\Form\Element\Submit) :
+	$this->element->setAttribute ( 'class', 'btn btn-default' );
+	echo $this->formelement ( $this->element );
+	?>
+
+ 
+ <?php elseif ($this->element instanceof \Zend\Form\Element\Checkbox): ?>
+		<div class="checkbox">
+		<label>
+	          <?php
+	echo $this->formelement ( $this->element );
+	echo $label;
+	?>
+	        </label>
+	</div>
+ 
+ 
+ <?php else : ?>
+	<?php
+	$class = $this->element->getAttribute ( 'class' );
+	
+	if (empty ( $class ))
+		$class = "form-control";
+	else {
+		$class = preg_replace ( "~(^| *)form-control($| *)~i", "", $class );
+		$class = trim ( $class . " form-control" );
+	}
+	
+	$this->element->setAttribute ( 'class', "{$class}" );
+	?>
+	
+	<label for="<?php echo $name; ?>" class="sr-only"><?php echo $label; ?></label>
+		<?php echo $this->formelement($this->element); ?>
+		
+ <?php endif; ?>
+ <?php
+	echo $this->formelementerrors ( $this->element );
+	?>
+</div>
