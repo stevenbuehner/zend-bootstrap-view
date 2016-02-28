@@ -1,12 +1,24 @@
 {
     "name": "stevenbuehner/zend-bootstrap-view",
     "description": "Partial View-Templates to render the ZendForms (and in the future potentially others elements of bootstrap). This module needs bootstrap V3 included in its stylesheet path.",
+        "keywords": [
+        "zf2",
+        "zend",
+        "module",
+        "bootstrap",
+        "partial templates"
+    ],
     "authors": [
         {
             "name": "Steven Buehner",
             "email": "buehner@me.com"
         }
     ],
+    "autoload": {
+        "classmap": [
+            "Module.php"
+        ]
+    },
     "license": "MIT",
     "require": {}
 }
