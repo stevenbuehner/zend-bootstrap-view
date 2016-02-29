@@ -1,0 +1,12 @@
+
+<div
+	class="col-xs-3 bs-wizard-step <?php echo $this->escapeHtml($this->status); ?>">
+	<div class="text-center bs-wizard-stepnum"><?php echo $this->escapeHtml($this->title); ?></div>
+	<div class="progress">
+		<div class="progress-bar"></div>
+	</div>
+	<a
+		href="<?php echo ($this->status === 'complete' ) ? $this->link : '#' ?>"
+		class="bs-wizard-dot"></a>
+	<div class="bs-wizard-info text-center"><?php echo $this->escapeHtml($this->description); ?></div>
+</div>
